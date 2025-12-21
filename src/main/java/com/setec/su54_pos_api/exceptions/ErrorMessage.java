@@ -1,4 +1,4 @@
-package com.setec.spring_demo_api.exceptions;
+package com.setec.su54_pos_api.exceptions;
 
 import java.util.Date;
 

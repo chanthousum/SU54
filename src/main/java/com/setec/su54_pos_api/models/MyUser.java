@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "User")
-public class User {
+public class MyUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -13,7 +13,6 @@ public class User {
     private String email;
     @OneToOne(mappedBy = "user",cascade =CascadeType.ALL)
     private UserProfile userProfile;
-
     public int getId() {
         return id;
     }

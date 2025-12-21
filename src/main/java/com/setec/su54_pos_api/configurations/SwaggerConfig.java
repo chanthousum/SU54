@@ -1,4 +1,4 @@
-package com.setec.su8_pos_api.configurations;
+package com.setec.su54_pos_api.configurations;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
@@ -8,19 +8,21 @@ import io.swagger.v3.oas.models.security.Scopes;
 import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-
+    @Value("${production}")
+    private String production;
     private static final String securitySchemeName = "oauth2Scheme";
 
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("SU8 Spring Boot API")
+                        .title("SU54 Spring Boot API "+production)
                         .version("1.0")
                         .description("API documentation for My Spring Boot application"))
                 .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
