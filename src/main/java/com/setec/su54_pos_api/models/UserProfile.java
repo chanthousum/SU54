@@ -1,6 +1,14 @@
 package com.setec.su54_pos_api.models;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "UserProfile")
@@ -9,10 +17,11 @@ public class UserProfile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String address;
-    private String phoneNumber;
+    private String phone;
+    @JsonIgnore
     @OneToOne
-    @JoinColumn(name = "user_id")
-    private  MyUser user;
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public int getId() {
         return id;
@@ -30,19 +39,20 @@ public class UserProfile {
         this.address = address;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public MyUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(MyUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
+
 }

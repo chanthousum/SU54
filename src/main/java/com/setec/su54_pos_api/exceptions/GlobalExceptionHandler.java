@@ -1,4 +1,4 @@
-package com.setec.su54_pos_api.exceptions;
+package com.setec.su14_23_api.exceptions;
 
 import java.util.Date;
 import java.util.HashMap;
