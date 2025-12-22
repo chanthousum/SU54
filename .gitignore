@@ -31,5 +31,5 @@
 #
 #### VS Code ###
 #.vscode/
-uploads/
-target/
+uploads/*
+target/*
