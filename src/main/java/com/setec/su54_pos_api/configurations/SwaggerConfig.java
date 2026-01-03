@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+import io.swagger.v3.oas.models.servers.Server;
 @Configuration
 public class SwaggerConfig {
     @Value("${production}")
@@ -16,6 +18,10 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("SU54 Spring Boot API "+production)
                         .version("1.0")
-                        .description("API documentation for My Spring Boot application"));
+                        .description("API documentation for My Spring Boot application")
+                        ).servers(List.of(
+                new Server().url("https://sumchanthou.com")
+        ));
+
     }
 }
