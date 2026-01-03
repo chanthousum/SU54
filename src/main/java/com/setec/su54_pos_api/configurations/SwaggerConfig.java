@@ -20,7 +20,7 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API documentation for My Spring Boot application")
                         ).servers(List.of(
-                new Server().url("https://sumchanthou.com")
+                new Server().url("https://sumchanthou.com/swagger-ui/index.html")
         ));
 
     }
