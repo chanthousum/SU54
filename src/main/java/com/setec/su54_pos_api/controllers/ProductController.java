@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.setec.su54_pos_api.services.ProductService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -29,13 +31,15 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 public class ProductController {
     @Autowired
     final private ProductService productService;
-
+    Logger logger =
+            LoggerFactory.getLogger(ProductController.class);
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
     @GetMapping("/")
     public ResponseEntity<?> getAllProducts() {
+        logger.info("Get all products");
         var products = this.productService.getAllProducts();
         return new ResponseEntity<>(products, HttpStatus.OK);
     }

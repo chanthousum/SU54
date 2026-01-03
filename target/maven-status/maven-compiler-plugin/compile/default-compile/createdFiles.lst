@@ -5,7 +5,9 @@ com/setec/su54_pos_api/models/Category.class
 com/setec/su54_pos_api/configurations/SwaggerConfig.class
 com/setec/su54_pos_api/models/Passport.class
 com/setec/su54_pos_api/configurations/FileUploadUtil.class
+com/setec/su54_pos_api/models/Student.class
 com/setec/su54_pos_api/controllers/ProductController.class
+com/setec/su54_pos_api/models/Course.class
 com/setec/su54_pos_api/models/Product.class
 com/setec/su54_pos_api/controllers/CategoryController.class
 com/setec/su54_pos_api/repositorys/UserRepository.class
