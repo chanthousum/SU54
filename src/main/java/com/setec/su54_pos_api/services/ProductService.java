@@ -37,13 +37,14 @@ public class ProductService {
         var products = this.productRepository.findAll();
         List<Product> products1 = new ArrayList<Product>();
         for (Product product : products) {
-             product.setProductName(product.getProductName());
-             product.setBarcode(product.getBarcode());
-             product.setSellPrice(product.getSellPrice());
-             product.setUnitInStock(product.getUnitInStock());
-             product.setPhoto(this.domainName+"/"+this.folderUploads+product.getPhoto());
-             product.setCategory(product.getCategory());
-             products1.add(product);
+            Product product1 = new Product();
+             product1.setProductName(product.getProductName());
+             product1.setBarcode(product.getBarcode());
+             product1.setSellPrice(product.getSellPrice());
+             product1.setUnitInStock(product.getUnitInStock());
+             product1.setPhoto(this.domainName+"/"+this.folderUploads+product.getPhoto());
+             product1.setCategory(product.getCategory());
+             products1.add(product1);
         }
         return products1;
     }
