@@ -14,14 +14,20 @@ public class SwaggerConfig {
     private  String production;
     @Bean
     public OpenAPI customOpenAPI() {
-        return new OpenAPI()
-                .info(new Info()
-                        .title("SU54 Spring Boot API "+production)
-                        .version("1.0")
-                        .description("API documentation for My Spring Boot application")
-                        ).servers(List.of(
-                new Server().url("https://sumchanthou.com")
-        ));
+//        return new OpenAPI()
+//                .info(new Info()
+//                        .title("SU54 Spring Boot API "+production)
+//                        .version("1.0")
+//                        .description("API documentation for My Spring Boot application")
+//                        ).servers(List.of(
+//                new Server().url("https://sumchanthou.com")
+//        ));
+        // This ensures the "Servers" dropdown in Swagger UI uses HTTPS
+        Server server = new Server();
+        server.setUrl("https://sumchanthou.com");
+        server.setDescription("Production");
+
+        return new OpenAPI().servers(List.of(server));
 
     }
 }
