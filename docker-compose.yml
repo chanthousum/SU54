@@ -3,6 +3,7 @@ services:
   db:
     image: mysql:8.4
     container_name: mysql-container3
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: Password123@
       MYSQL_DATABASE: test_db
@@ -12,6 +13,7 @@ services:
       - spring-net
   spring-api:
     image: su54_pos_api
+    restart: always
     container_name: su54_pos_api
     ports:
       - "8090:8080"
