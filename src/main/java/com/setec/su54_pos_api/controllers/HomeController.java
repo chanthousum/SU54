@@ -17,7 +17,7 @@ public class HomeController {
             LoggerFactory.getLogger(HomeController.class);
     @GetMapping("")
     public String home() {
-        return "swagger-ui/index.html";
+        return "redirect:/swagger-ui/index.html";
     }
 
     @GetMapping("/{id}")
