@@ -16,12 +16,12 @@ public class SwaggerConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("SU54 Spring Boot API "+production)
+                        .title("SU54 Spring Boot API " + production)
                         .version("1.0")
                         .description("API documentation for My Spring Boot application")
-                        ).servers(List.of(
-                new Server().url("https://sumchanthou.com")
-        ));
+                ).servers(List.of(
+                        new Server().url("https://sumchanthou.com")
+                ));
 
-
+    }
 }

@@ -19,7 +19,6 @@ public class CategoryController {
         super();
         this.categoryService = _categoryService;
     }
-    @CrossOrigin(origins = "*")
     @GetMapping("/")
     public ResponseEntity<?> getCategoryAll() {
         var categories = categoryService.getCategoryAll();
