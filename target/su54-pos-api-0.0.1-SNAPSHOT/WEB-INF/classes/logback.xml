@@ -1,8 +1,6 @@
 <configuration>
-
     <property name="LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"/>
-    <property name="Dates" value="%d{yyyy-MM-dd HH:mm:ss}"/>
-
+    <springProfile name="dev">
     <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>
@@ -30,9 +28,13 @@
         </rollingPolicy>
     </appender>
 
-    <root level="DEBUG">
+
+        <logger name="org.hibernate.SQL" level="WARN"/>
+        <logger name="org.springframework" level="INFO"/>
+    <root level="INFO">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ROLLING_FILE"/>
     </root>
+    </springProfile>
 
 </configuration>
