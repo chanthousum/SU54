@@ -1,6 +1,7 @@
 package com.setec.su54_pos_api.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -21,6 +22,8 @@ import jakarta.transaction.Transactional;
 public class ProductService {
     @Value("${file.upload-dir}")
     private String folderUploads;
+    @Value("${domain}")
+    private String domainName;
     @Autowired
     final private ProductRepository productRepository;
 
@@ -32,7 +35,17 @@ public class ProductService {
     @Async
     public List<Product> getAllProducts() {
         var products = this.productRepository.findAll();
-        return products;
+        List<Product> products1 = new ArrayList<Product>();
+        for (Product product : products) {
+             product.setProductName(product.getProductName());
+             product.setBarcode(product.getBarcode());
+             product.setSellPrice(product.getSellPrice());
+             product.setUnitInStock(product.getUnitInStock());
+             product.setPhoto(this.domainName+"/"+this.folderUploads+product.getPhoto());
+             product.setCategory(product.getCategory());
+             products1.add(product);
+        }
+        return products1;
     }
 
     @Transactional
