@@ -12,8 +12,8 @@ import io.swagger.v3.oas.models.servers.Server;
 public class SwaggerConfig {
     @Value("${production}")
     private  String production;
-    @Value("${domain}")
-    private  String domainName;
+    @Value("${serverUrl}")
+    private  String serverUrl;
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -22,7 +22,7 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API documentation for My Spring Boot application")
                 ).servers(List.of(
-                        new Server().url(this.domainName)
+                        new Server().url("/")
                 ));
 
     }

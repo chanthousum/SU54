@@ -13,8 +13,10 @@ public class WebConfig implements WebMvcConfigurer {
     private String uploadDir;
 
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler(new String[] { "/uploads/**" })
+        registry.addResourceHandler(new String[] { this.uploadDir+"/**" })
                 .addResourceLocations(new String[] { "file:" + this.uploadDir });
+//        registry.addResourceHandler("/uploads/**")
+//                .addResourceLocations("file:" + uploadDir + "/");
     }
     @Override
     public void addCorsMappings(CorsRegistry registry) {

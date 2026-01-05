@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.setec.su54_pos_api.models.Category;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -60,5 +61,19 @@ public class CategoryController {
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Category delted successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+    @GetMapping("/base-url")
+    public String baseUrl(HttpServletRequest request) {
+        String scheme = request.getScheme();
+        String host = request.getServerName();
+        int port = request.getServerPort();
+
+        // Build base URL
+        if ((scheme.equals("http") && port == 80)
+                || (scheme.equals("https") && port == 443)) {
+            return scheme + "://" + host;
+        }
+
+        return scheme + "://" + host + ":" + port;
     }
 }

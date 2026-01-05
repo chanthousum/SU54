@@ -22,8 +22,8 @@ import jakarta.transaction.Transactional;
 public class ProductService {
     @Value("${file.upload-dir}")
     private String folderUploads;
-    @Value("${domain}")
-    private String domainName;
+    @Value("${serverUrl}")
+    private String serverUrl;
     @Autowired
     final private ProductRepository productRepository;
 
@@ -38,11 +38,12 @@ public class ProductService {
         List<Product> products1 = new ArrayList<Product>();
         for (Product product : products) {
             Product product1 = new Product();
+             product1.setId(product.getId());
              product1.setProductName(product.getProductName());
              product1.setBarcode(product.getBarcode());
              product1.setSellPrice(product.getSellPrice());
              product1.setUnitInStock(product.getUnitInStock());
-             product1.setPhoto(this.domainName+"/"+this.folderUploads+product.getPhoto());
+             product1.setPhoto(this.serverUrl +"/"+this.folderUploads+product.getPhoto());
              product1.setCategory(product.getCategory());
              products1.add(product1);
         }
