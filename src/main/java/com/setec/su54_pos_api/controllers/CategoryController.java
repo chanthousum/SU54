@@ -59,7 +59,7 @@ public class CategoryController {
     public ResponseEntity<?> deleteById(@PathVariable int id) {
         this.categoryService.deleteById(id);
         Map<String, Object> response = new HashMap<>();
-        response.put("message", "Category delted successfully");
+        response.put("message", "Category deleted successfully");
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
     @GetMapping("/base-url")
@@ -67,7 +67,6 @@ public class CategoryController {
         String scheme = request.getScheme();
         String host = request.getServerName();
         int port = request.getServerPort();
-
         // Build base URL
         if ((scheme.equals("http") && port == 80)
                 || (scheme.equals("https") && port == 443)) {

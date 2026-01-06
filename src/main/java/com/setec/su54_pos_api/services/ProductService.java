@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.UUID;
 
 import com.setec.su54_pos_api.models.Product;
+import io.swagger.v3.oas.models.servers.Server;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -17,6 +19,7 @@ import com.setec.su54_pos_api.models.Category;
 import com.setec.su54_pos_api.repositorys.ProductRepository;
 
 import jakarta.transaction.Transactional;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @Service
 public class ProductService {
@@ -31,7 +34,12 @@ public class ProductService {
         super();
         this.productRepository = productRepository;
     }
-
+    public String getBaseUrl(){
+        String baseUrl = ServletUriComponentsBuilder.fromCurrentContextPath()
+                .build()
+                .toUriString();
+        return baseUrl;
+    }
     @Async
     public List<Product> getAllProducts() {
         var products = this.productRepository.findAll();
@@ -43,16 +51,18 @@ public class ProductService {
              product1.setBarcode(product.getBarcode());
              product1.setSellPrice(product.getSellPrice());
              product1.setUnitInStock(product.getUnitInStock());
-             product1.setPhoto(this.serverUrl +"/"+this.folderUploads+product.getPhoto());
+             product1.setPhoto(this.getBaseUrl()+"/"+this.folderUploads+product.getPhoto());
              product1.setCategory(product.getCategory());
              products1.add(product1);
         }
         return products1;
+
+
     }
 
     @Transactional
     @Async
-    public void createProduct(String name, long barcode, double sellPrice, int unitInStock, int categoryId,
+    public Product createProduct(String name, long barcode, double sellPrice, int unitInStock, int categoryId,
             MultipartFile file) throws IOException {
         Product product = new Product();
         product.setProductName(name);
@@ -69,7 +79,7 @@ public class ProductService {
         } else {
             product.setPhoto("");
         }
-        this.productRepository.save(product);
+        return  this.productRepository.save(product);
 
     }
 

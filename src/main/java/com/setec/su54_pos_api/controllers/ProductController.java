@@ -49,9 +49,10 @@ public class ProductController {
             @RequestParam("sellPrice") double sellPrice, @RequestParam("unitInStock") int unitInStock,
             @RequestParam("categoryId") int categoryId,
             @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
-        this.productService.createProduct(name, barcode, sellPrice, unitInStock, categoryId, file);
+        var product=this.productService.createProduct(name, barcode, sellPrice, unitInStock, categoryId, file);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Product created successfully");
+        response.put("data",product);
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
