@@ -2,7 +2,7 @@ version: "3.9"
 services:
   postgres:
     image: postgres:15
-    container_name: keycloak-postgres_su54
+    container_name: keycloak-postgres-su54
     restart: always
     environment:
       POSTGRES_DB: keycloak
@@ -11,8 +11,8 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
   keycloak:
-      image: quay.io/keycloak/keycloak:24.0.5
-      container_name: keycloak_su54
+      image: quay.io/keycloak/keycloak:25.0.1
+      container_name: keycloak-su54
       restart: always
       depends_on:
         - postgres
@@ -45,7 +45,7 @@ services:
   spring-api:
     image: su54_pos_api
     restart: always
-    container_name: su54_pos_api
+    container_name: su54-pos-api
     ports:
       - "8090:8080"
     depends_on:
