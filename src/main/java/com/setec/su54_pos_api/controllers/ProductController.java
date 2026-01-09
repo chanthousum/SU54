@@ -53,15 +53,16 @@ public class ProductController {
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
-    @PutMapping(value = "{id}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PutMapping(value = "{id}/", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity<?> updateById(@PathVariable int id, @RequestParam("name") String name,
             @RequestParam("barcode") long barcode,
             @RequestParam("sellPrice") double sellPrice, @RequestParam("unitInStock") int unitInStock,
             @RequestParam("categoryId") int categoryId,
             @RequestParam(value = "file", required = false) MultipartFile file) throws IOException {
-        this.productService.updateById(id, name, barcode, sellPrice, unitInStock, categoryId, file);
+        var product=this.productService.updateById(id, name, barcode, sellPrice, unitInStock, categoryId, file);
         Map<String, Object> response = new HashMap<>();
         response.put("message", "Product updated successfully");
+        response.put("data",product);
         return ResponseEntity.ok(response);
     }
 

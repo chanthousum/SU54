@@ -12,7 +12,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
   keycloak:
       image: quay.io/keycloak/keycloak:25.0.1
-      container_name: keycloak-su54
+      container_name: keycloak-server-su54
       restart: always
       depends_on:
         - postgres
@@ -25,7 +25,7 @@ services:
         KEYCLOAK_ADMIN: admin
         KEYCLOAK_ADMIN_PASSWORD: admin123
 
-        KC_HOSTNAME: https://sumchanthou.com:8081
+        KC_HOSTNAME: localhost
         KC_PROXY: edge
         KC_HTTP_ENABLED: "true"
       command: start

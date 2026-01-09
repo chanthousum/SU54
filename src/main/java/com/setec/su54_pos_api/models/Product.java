@@ -1,11 +1,6 @@
 package com.setec.su54_pos_api.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Product")
@@ -13,7 +8,9 @@ public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true, nullable = false)
     private String productName;
+    @Column(unique = true, nullable = false)
     private long barcode;
     private double sellPrice;
     private int unitInStock;

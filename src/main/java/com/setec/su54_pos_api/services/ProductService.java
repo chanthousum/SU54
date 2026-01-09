@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 import com.setec.su54_pos_api.dto.request.ProductRequestDTO;
+import com.setec.su54_pos_api.exceptions.MyResourceNotFoundException;
 import com.setec.su54_pos_api.models.Product;
 import io.swagger.v3.oas.models.servers.Server;
 import jakarta.servlet.http.HttpServletRequest;
@@ -86,12 +87,19 @@ public class ProductService {
 
     @Transactional
     @Async
-    public void updateById(int id, String name, long barcode, double sellPrice, int unitInStock, int categoryId,
+    public Product updateById(int id, String name, long barcode, double sellPrice, int unitInStock, int categoryId,
             MultipartFile file) throws IOException {
         var existingProduct = this.productRepository.findProductById(id);
         if (existingProduct == null) {
-            throw new com.setec.su14_23_api.exceptions.MyResourceNotFoundException("Product not found with id: " + id);
+            throw new MyResourceNotFoundException("Product not found with id: " + id);
+        }
 
+        if (productRepository.existsByProductNameAndIdNot(name, id)) {
+            throw new MyResourceNotFoundException("Product name already exists");
+        }
+
+        if (productRepository.existsByBarcodeAndIdNot(barcode, id)) {
+            throw new MyResourceNotFoundException("Product barcode already exists");
         }
         existingProduct.setProductName(name);
         existingProduct.setBarcode(barcode);
@@ -114,7 +122,7 @@ public class ProductService {
                 existingProduct.setPhoto(fileName);
             }
         }
-        this.productRepository.save(existingProduct);
+        return this.productRepository.save(existingProduct);
     }
 
     @Transactional
@@ -122,7 +130,7 @@ public class ProductService {
     public void deleteById(int id) throws IOException {
         var existingProduct = this.productRepository.findProductById(id);
         if (existingProduct == null) {
-            throw new com.setec.su14_23_api.exceptions.MyResourceNotFoundException("Product not found with id: " + id);
+            throw new MyResourceNotFoundException("Product not found with id: " + id);
 
         }
         if (!existingProduct.getPhoto().isEmpty()) {

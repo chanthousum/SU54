@@ -1,7 +1,7 @@
 package com.setec.su54_pos_api.services;
 import java.util.List;
 
-import com.setec.su14_23_api.exceptions.MyResourceNotFoundException;
+import com.setec.su54_pos_api.exceptions.MyResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Async;
