@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.setec.su54_pos_api.dto.request.ProductRequestDTO;
 import com.setec.su54_pos_api.models.Product;
 import io.swagger.v3.oas.models.servers.Server;
 import jakarta.servlet.http.HttpServletRequest;
@@ -128,5 +129,25 @@ public class ProductService {
             FileUploadUtil.removePhoto(folderUploads, existingProduct.getPhoto());
         }
         this.productRepository.deleteById(id);
+    }
+
+    public ProductRequestDTO createProduct(ProductRequestDTO productRequestDTO, MultipartFile file) throws IOException {
+        Product product = new Product();
+        product.setProductName(productRequestDTO.getProductName());
+        product.setBarcode(productRequestDTO.getBarcode());
+        product.setSellPrice(productRequestDTO.getSellPrice());
+        product.setUnitInStock(productRequestDTO.getQuantity());
+        Category category = new Category();
+        category.setId(productRequestDTO.getCategoryId());
+        product.setCategory(category);
+        if (file != null && !file.isEmpty()) {
+            String fileName = UUID.randomUUID() + "_" + file.getOriginalFilename();
+            FileUploadUtil.saveFile(folderUploads, fileName, file);
+            product.setPhoto(fileName);
+        } else {
+            product.setPhoto("");
+        }
+        this.productRepository.save(product);
+        return  productRequestDTO;
     }
 }
