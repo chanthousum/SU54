@@ -24,9 +24,13 @@ services:
 
         KEYCLOAK_ADMIN: admin
         KEYCLOAK_ADMIN_PASSWORD: admin123
-        KC_HOSTNAME: my-server.sumchanthou.com
+        # 🔑 IMPORTANT FIXES
+        KC_HTTP_ENABLED: "true"
         KC_PROXY: edge
-        KC_HTTP_ENABLED: true
+        KC_HOSTNAME: my-server.sumchanthou.com
+        KC_HOSTNAME_STRICT: "false"
+        KC_HOSTNAME_URL: https://my-server.sumchanthou.com
+        KC_HOSTNAME_ADMIN_URL: https://my-server.sumchanthou.com
       command: start
       ports:
         - "8081:8080"
