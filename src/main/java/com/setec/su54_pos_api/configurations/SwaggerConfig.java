@@ -14,9 +14,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class SwaggerConfig {
     @Value("${production}")
     private  String production;
-    public String getServerUrl(){
-        return ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString();
-    }
     @Bean
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
@@ -25,7 +22,7 @@ public class SwaggerConfig {
                         .version("1.0")
                         .description("API documentation for My Spring Boot application")
                 ).servers(List.of(
-                        new Server().url(this.getServerUrl())
+                        new Server().url("/")
                 ));
 
     }
