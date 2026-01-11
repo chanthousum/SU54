@@ -27,8 +27,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 public class ProductService {
     @Value("${file.upload-dir}")
     private String folderUploads;
-    @Value("${serverUrl}")
-    private String serverUrl;
     @Autowired
     final private ProductRepository productRepository;
 

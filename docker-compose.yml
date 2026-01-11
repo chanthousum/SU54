@@ -27,10 +27,10 @@ services:
         # 🔑 IMPORTANT FIXES
         KC_HTTP_ENABLED: "true"
         KC_PROXY: edge
-        KC_HOSTNAME: my-server.sumchanthou.com
+#        KC_HOSTNAME: "/"
         KC_HOSTNAME_STRICT: "false"
-        KC_HOSTNAME_URL: https://my-server.sumchanthou.com
-        KC_HOSTNAME_ADMIN_URL: https://my-server.sumchanthou.com
+        KC_HOSTNAME_URL: https://localhost:8443
+        KC_HOSTNAME_ADMIN_URL: https://localhost:8443
       command: start
       ports:
         - "8081:8080"
